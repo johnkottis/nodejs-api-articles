@@ -1,0 +1,48 @@
+Please follow the steps:
+
+#1	Install Node 						https://nodejs.org/download/
+
+#2 	Install MongoDB 					https://www.mongodb.org/downloads
+
+#3	In the projects directory execute:	npm install
+
+#4	Start the application |	execute:	node app
+
+#5	Start mongodb 		  | execute:	cd C:\Program Files\MongoDB\Server\3.0\bin
+
+						  |	execute:	C:\Program Files\MongoDB\Server\3.0\bin>mongo
+
+#6	Start using the API either in a new console window or in a web application
+	I am using cherome's application Advanced Rest Client	
+	https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo
+
+#7	http://localhost:3000/articles lists all articles in database (Initially should be empty) use GET to retrieve data
+
+#8	Use POST method to insert data
+		var article_headline = req.body.article_headline,
+        article_fullContent = req.body.article_fullContent,
+        article_channel = req.body.article_channel,
+        article_status = req.body.article_status,
+        article_author = req.body.article_author;
+
+#9	Use DELETE method to delete data
+
+#10	Use PUT method to update data
+		var id = req.body.id,
+        headline = req.body.article_headline,
+        fullContent = req.body.article_fullContent,
+        channel = req.body.article_channel,
+        author = req.body.article_author,
+        statuss = req.body.article_statuss;
+
+#11 Author and status are plain string without dependencies on other tables/ collections.
+	In a production enviroment these two are going to be FKs to the authors and status tables.
+
+#12	In order to get articles from a channel request:
+	http://localhost:3000/articles/channel/{channel-name}
+
+#13	In order to get a specific article:
+	http://localhost:3000/articles/{article-id}
+
+#14	In order to get articles with specific status:
+	http://localhost:3000/articles/status/{status-name}

@@ -1,0 +1,47 @@
+#########################################
+####          Technologies	         ####
+#########################################
+	i)		The Articles API tasks was implemented with NodeJS, ExpressJS and the data were stored in a MongoDB database with Mongoose.
+	ii)		ExpressJS is web application framework that runs on NodeJS. Allows you to build web applications and APIs endpoints.
+	iii)	MongoDB is a document-oriented NoSQL database (Big Data ready). It stores data in JSON-like format and allows to perform SQL-like queries against it. 
+	iv)		Mongoose provides a straight-forward, schema-based solution to modeling your application data and includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
+	V)		The main reason for selecting this architecture is that node’s event-driven asynchronous design allows a single node process to handle multiple requests concurrently.
+	
+
+#########################################
+####  Concurrent Requests Handling	 ####
+#########################################
+	As mentioned previously the main reason for selecting Node for bulding the Article's API is that Node’s event-driven asynchronous design allows a single node process to handle multiple requests concurrently. 
+	Node’s evented architecture presents the event loop as a language construct instead of as a library. 
+	Initially, a single node process is more than enough to handle the request volume.
+
+	In order to achieve greater concurrency by taking advantage of node core’s cluster module, which automatically load-balances incoming connections across multiple processes, so we are going to be able to create child processes that share server ports and make better use of dyno resources.
+
+
+#########################################
+#### Improvements for next version	 ####
+#########################################
+
+#0 Caching
+	In my carrer so far I have only worked only with Redis which is the solution that I use for node projects as well.
+	I use redis-node-client node plugin in order to connect to Redis from node.
+	The implementation is really simple. First we check if the posts exist in the Redis cache. If so, we deliver the posts array from cache. Otherwise, we retrieve the content from the DB and then cache it. Also, after an interval we can clear the Redis cache so that new content can be fetched. Alternatively we can use the apicache an ultra-simplified API/JSON response caching middleware for Express/Node using plain-english durations.
+
+#1 Results Pagination
+	Prevents:		Serious inconveniences for database, browser and web-server.
+	Requirements:	Display pagination meta information to the user but not meta stats like the total number of results or number of results on the currently returned page. Though these might be useful in some cases, most of the time they are a waste of computing time and increasing the query load on our database for good.
+
+#2 Limiting Requests per user
+	Prevents:		To prevent abuse, it is standard practice to add some sort of rate limiting to an API.
+	Requirements:	Notify the consumer of their limits before they actually hit it
+
+#3 Field selection
+	Prevents:		This will also reduce the network traffic and speed up the usage of the API.
+	Requirements:	Give the API consumer the ability to choose returned fields.
+
+#4 Use limit and offset.
+	Prevents:		This will also reduce the network traffic and speed up the usage of the API.
+	Requirements:	It is flexible for the user and common in leading databases. To send the total entries back to the user use the custom HTTP header: X-Total-Count.
+
+#5 Use error payloads
+	Requirements:	All exceptions should be mapped in an error payload.

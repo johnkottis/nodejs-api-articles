@@ -1,0 +1,14 @@
+{
+    "name": "articlesCMS",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "3.0.0beta4",
+        "jade": "*",
+        "mongodb": "^2.0.33",
+        "mongoose": "~2.7.x"
+    }
+}
